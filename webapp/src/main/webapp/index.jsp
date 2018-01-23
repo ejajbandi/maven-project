@@ -1,3 +1,2 @@
 Hello, World!
-Now Ejaj check it again
-Wow!
+Ejaj let's test the project
