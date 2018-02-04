@@ -1,2 +1,1 @@
-Jenkins CI Working Bingo!!!
-
+Bingo!!!
