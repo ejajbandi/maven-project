@@ -1,8 +1,8 @@
 pipeline {
 agent any
 tools {
-maven 'mvn'
-jdk 'java'
+maven 'maven3'
+jdk 'java8'
 }
 stages {
 stage ('init') {
@@ -27,10 +27,29 @@ checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', 
 }
 }
 }
-stage ('tomcat-staging') {
+stage ('deploy_to_stag') {
 steps {
-build 'tomcat-staging'
+build 'deploy-to-staging'
+}
+}
+stage ('Deploy to Production'){
+steps{
+timeout(2){
+input message:'Approve PRODUCTION Deployment?'
+}
+
+build job: 'deploy-to-prod'
+}
+post {
+success {
+echo 'Code deployed to Production.'
+}
+
+failure {
+echo ' Deployment failed.'
 }
 }
 }
 }
+}
+
